@@ -19,8 +19,8 @@ def homepage():
 @app.route("/dummy_data")
 def dummy_data():
     return json.dumps([
-        {'name': 'Pushkar', 'email': 'pushkarnim@gmail.com', 'content': 'Lorem Ipsum'},
-        {'name': 'Rajas', 'email': 'hacker-rajas@gmail.com', 'content': 'I am the Hacker!'}
+        {'name': 'Pushkar', 'pred_vs_perf_latest_diff': 'pushkarnim@gmail.com', 'test_since_at_risk': 'Lorem Ipsum'},
+        {'name': 'Rajas', 'pred_vs_perf_latest_diff': 'hacker-rajas@gmail.com', 'test_since_at_risk': 'I am the Hacker!'}
     ])
 
 
@@ -47,6 +47,23 @@ def class2():
 @app.route("/class3.html")
 def class3():
     return render_template("class3.html")
+
+
+@app.route("/overview/<class_number>")
+def at_risk_drop_down(class_number):
+    class_name_dict = {
+        '1': 'Grade 3, Maths',
+        '2': 'Grade 4, Maths',
+        '3': 'Grade 5, Maths'
+    }
+    class_name = class_name_dict[class_number]
+    df_student_list = model.query_students(class_name=class_name) #student db filtered by class
+    df_overview = df_student_list[df_student_list['at_risk'] == 1][['name','pred_vs_perf_latest_diff','test_since_at_risk']]
+    df_overview.loc[0, :] = '1'
+    df_overview.loc[1, :] = '1'
+    df_overview.loc[2, :] = '1'
+    return df_overview.to_json(orient='records')
+
 
 # @app.route("/docs")
 # def docs():

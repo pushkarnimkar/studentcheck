@@ -18,6 +18,8 @@ class Student(Base):
     test_when_at_risk = sqlalchemy.Column(sqlalchemy.VARCHAR)
     outperform = sqlalchemy.Column(sqlalchemy.VARCHAR)
     on_track = sqlalchemy.Column(sqlalchemy.VARCHAR)
+    pred_vs_perf_latest_diff = sqlalchemy.Column(sqlalchemy.VARCHAR)
+    test_since_at_risk = sqlalchemy.Column(sqlalchemy.VARCHAR)
 
 
 class Scores(Base):
@@ -92,7 +94,7 @@ class Model:
 
 def main():
     model = Model()
-    scores = model.query_students(class_name='Grade 3, Maths', ids=list('123456789'))
+    scores = model.query_students(class_name='Grade 3, Maths')
     print(scores.shape[0])
 
 

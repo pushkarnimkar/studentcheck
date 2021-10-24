@@ -95,9 +95,6 @@
                 </div>
             </nav>
 
-
-            <table id="table"></table>
-
             <h5 class="mb-0"><BR>Math<BR></h5>
             <div id="accordion">
               <div class="card">
@@ -111,7 +108,14 @@
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                   <div class="card-body">
                    
-
+                    <table id="table-math-grade-3">
+                      <tr id="template-math-grade-3" class="dataRow">
+                        <td class="name">Name</td>
+                        <td class="pred_vs_perf_latest_diff">Predicted vs Performance Latest Difference</td>
+                        <td class="test_since_at_risk">Test since At Risk</td>
+                      </tr>
+                    </table>
+        
                   </div>
                 </div>
               </div>
@@ -259,12 +263,15 @@
             console.log('Loading...')
             $.getJSON( "/dummy_data", function( jsonData ) {
                     var length = jsonData.length;
+                    let grade = "3";
+                    let table_name = `table#table-math-grade-${grade}`;
+                    let template_name = `#template-math-grade-${grade}`;
                     for (var i = 0; i < length; i++) {
-                        var clone = $('#template').clone(true).attr('id', '');
+                        var clone = $(template_name).clone(true).attr('id', '');
                         clone.find('.name').html(jsonData[i]['name']);
-                        clone.find('.email').html(jsonData[i]['email']);
-                        clone.find('.content').html(jsonData[i]['content']);
-                        clone.appendTo('table');
+                        clone.find('.pred_vs_perf_latest_diff').html(jsonData[i]['pred_vs_perf_latest_diff']);
+                        clone.find('.test_since_at_risk').html(jsonData[i]['test_since_at_risk']);
+                        clone.appendTo(table_name);
                     }
             });
         }
