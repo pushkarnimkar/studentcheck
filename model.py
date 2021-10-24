@@ -69,7 +69,6 @@ class Model:
             selection = selection.where(Scores.id.in_(ids))
         return pd.read_sql(selection, self._engine)
 
-
     def query_students(self):
         pass
 
