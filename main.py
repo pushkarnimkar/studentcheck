@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from model import Model
 import os
 import json
@@ -24,10 +24,29 @@ def dummy_data():
     ])
 
 
-@app.route("/")
+@app.route("/index.html")
 def root():
     return render_template("index.html")
 
+
+@app.route("/")
+def root_alias():
+    return redirect("/index.html")
+
+
+@app.route("/class1.html")
+def class1():
+    return render_template("class1.html")
+
+
+@app.route("/class2.html")
+def class2():
+    return render_template("class2.html")
+
+
+@app.route("/class3.html")
+def class3():
+    return render_template("class3.html")
 
 # @app.route("/docs")
 # def docs():
