@@ -108,13 +108,9 @@
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                   <div class="card-body">
                    
-                    <table id="table-math-grade-3">
-                      <tr id="template-math-grade-3" class="dataRow">
-                        <td class="name">Name</td>
-                        <td class="pred_vs_perf_latest_diff">Predicted vs Performance Latest Difference</td>
-                        <td class="test_since_at_risk">Test since At Risk</td>
-                      </tr>
-                    </table>
+                    <table id="table"></table>
+                      
+                      
         
                   </div>
                 </div>
@@ -258,6 +254,28 @@
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
         }); 
+                                
+                    $('#table').bootstrapTable({
+              columns: [{
+                field: 'id',
+                title: 'Item ID'
+              }, {
+                field: 'name',
+                title: 'Item Name'
+              }, {
+                field: 'price',
+                title: 'Item Price'
+              }],
+              data: [{
+                id: 1,
+                name: 'Item 1',
+                price: '$1'
+              }, {
+                id: 2,
+                name: 'Item 2',
+                price: '$2'
+              }]
+            })
 
         function onLoad() {
             console.log('Loading...')
