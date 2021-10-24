@@ -69,13 +69,30 @@ class Model:
             selection = selection.where(Scores.id.in_(ids))
         return pd.read_sql(selection, self._engine)
 
-    def query_students(self):
-        pass
+    def query_students(self,
+                       class_name=None, ids=None, at_risk=None,
+                       outperform=None, on_track=None
+                       ):
+
+        selection = select(Student)
+        if class_name is not None:
+            selection = selection.where(Student.class_name == class_name)
+        if ids is not None:
+            if not isinstance(ids, list):
+                ids = [ids]
+            selection = selection.where(Student.id.in_(ids))
+        if at_risk is not None:
+            selection = selection.where(Student.at_risk == at_risk)
+        if outperform is not None:
+            selection = selection.where(Student.outperform == outperform)
+        if on_track is not None:
+            selection = selection.where(Student.on_track == on_track)
+        return pd.read_sql(selection, self._engine)
 
 
 def main():
     model = Model()
-    scores = model.query_scores(grade='Grade 3, Maths', ids=list('123456789'))
+    scores = model.query_students(class_name='Grade 3, Maths', ids=list('123456789'))
     print(scores.shape[0])
 
 
