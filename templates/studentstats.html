@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>Collapsible sidebar using Bootstrap 4</title>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
     <!-- Bootstrap CSS CDN -->
@@ -27,7 +26,7 @@
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>    
     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.js"></script>
 
@@ -65,7 +64,7 @@
                     <a href="studentstats.html">Student Stats</a>
                 </li>
                 <li>
-                    <a href="atracker.html">Action Tracker</a>
+                    <a href="#">Action Tracker</a>
                 </li>
             </ul>
 
@@ -73,7 +72,6 @@
 
         <!-- Page Content  -->
         <div id="content">
-
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
@@ -105,67 +103,28 @@
             </nav>
 
 
-            <h5 class="mb-0"><BR>Grade 5 | Mathematics <BR><BR></h5>
-            <div id="accordion">
-              <div class="card">
-                <div class="card-header" id="headingOne">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      At Risk
-                    </button>
-                  </h5>
-                </div>
+<!-------------------DROPDOWN+BUTTON TO ADD STUDENTS TO GRAPH---------------------------------------->
 
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                  <div class="card-body">
+            <div class="dropdown show">
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Add Student
+              </a>
 
-<!-------------------FIRST TABLE GOES HERE ---------------------------------------->
-
-                   
-
-
-                  </div>
-                </div>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">Samantha Beasely</a>
+                <a class="dropdown-item" href="#">Kim Zhang</a>
+                <a class="dropdown-item" href="#">Catherine Sock</a>
               </div>
-              <div class="card">
-                <div class="card-header" id="headingTwo">
-                  <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      In Line
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                  <div class="card-body">
-
-
-<!-------------------SECOND TABLE GOES HERE ---------------------------------------->
+            </div>
+            <BR> <BR> 
 
 
 
+            <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header" id="headingThree">
-                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      Outperforming
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                  <div class="card-body">
+<!-----------------------CHART CONTAINER^^^^------------------------------->
 
-<!-------------------THIRD TABLE GOES HERE ---------------------------------------->
-
-
-
-
-
-                  </div>
-                </div>
-              </div>
-            </div>    
     </div>
 
     <script type="text/javascript">
@@ -184,6 +143,38 @@
 
     </script>
     <script src="table.js"></script>
+    <script>
+        window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            theme: "light2",
+            title:{
+                text: "Test performance | Student: Nick Patel"
+            },
+            data: [{        
+                type: "line",
+                indexLabelFontSize: 16,
+                dataPoints: [
+                    { y:  90 },
+                    { y: 86},
+                    { y: 99, indexLabel: "\u2191 highest",markerColor: "red", markerType: "triangle" },
+                    { y: 90 },
+                    { y: 86 },
+                    { y: 74 },
+                    { y: 72 },
+                    { y: 50 },
+                    { y: 40 , indexLabel: "\u2193 lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
+                    { y: 95 },
+                    { y: 99 },
+                    { y: 100 }
+                ]
+            }]
+        });
+        chart.render();
+
+        }
+    </script>
     </div>
 </body>
 
