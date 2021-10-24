@@ -1,0 +1,7 @@
+ipython
+pg8000
+sqlalchemy
+cloud-sql-python-connector[pg8000]
+pandas
+flask
+
