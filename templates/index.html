@@ -261,7 +261,7 @@
 
         function onLoad() {
             console.log('Loading...')
-            $.getJSON( "/dummy_data", function( jsonData ) {
+            $.getJSON( "/overview/1", function( jsonData ) {
                     var length = jsonData.length;
                     let grade = "3";
                     let table_name = `table#table-math-grade-${grade}`;

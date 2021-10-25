@@ -59,9 +59,11 @@ def at_risk_drop_down(class_number):
     class_name = class_name_dict[class_number]
     df_student_list = model.query_students(class_name=class_name) #student db filtered by class
     df_overview = df_student_list[df_student_list['at_risk'] == 1][['name','pred_vs_perf_latest_diff','test_since_at_risk']]
-    df_overview.loc[0, :] = '1'
-    df_overview.loc[1, :] = '1'
-    df_overview.loc[2, :] = '1'
+    df_overview.loc[0, :] = ('Pushkar Nimkar', '-35%', '1')
+    df_overview.loc[1, :] = ('Rajas Pandey', '-20%', '3')
+    df_overview.loc[2, :] = ('Jordan Axelrod', '-15%', '3')
+    df_overview.loc[3, :] = ('Alexandar Whitefield', '-15%', '2')
+    df_overview.loc[4, :] = ('Farhawn Gill', '-15%', '3')
     return df_overview.to_json(orient='records')
 
 
